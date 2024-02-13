@@ -1,23 +1,18 @@
-import rospy
 import time
 import numpy as np
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool, String, Int32
 
-from PyQt5 import QtCore
-from enum import Enum
 from keras.models import load_model
 
 from nodes.messages import prepare_bool_msg, prepare_image_msg, prepare_string_msg, prepare_int32_msg
 from nodes.node_core import NodeStatus, Topic, Node
-from sensor.sensor import Sensor
 from sensor.params import ImageMask
 from sensor.data_parsing import flatten
 from item.item import Item, ItemPlacement, ItemType
-from classifier.position_recognition import recognise_position
-from classifier.weight_estimation import estimate_weight, get_default_weight_estimation_model, \
-    estimate_weight_with_model, mean_absolute_percentage_square_error
-from classifier.image_recognition import Classifier
+from item.classifier.position_recognition import recognise_position
+from item.classifier.weight_estimation import estimate_weight, estimate_weight_with_model, mean_absolute_percentage_square_error
+from item.classifier.image_recognition import Classifier
 from debug.debug import *
 
 
@@ -49,10 +44,10 @@ class TableNode(Node):
     def __init__(self,
                  node_name="IntelligentTable",
                  language="en",
-                 model_path="classifier/models/classifier_model.keras",
+                 model_path="item/classifier/models/classifier_model.keras",
                  topic_prefix="/table",
                  weight_calculation_mode="internal",
-                 weight_calculation_model_path="classifier/models/weight_model.keras"
+                 weight_calculation_model_path="item/classifier/models/weight_model.keras"
                  ):
         # Set status
         self.node_status = TableStatus.initializing

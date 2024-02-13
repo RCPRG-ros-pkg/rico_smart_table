@@ -6,16 +6,14 @@ from keras.models import load_model
 
 from item.item_utils import loadItems, selectDesiredItems, selectDesiredPlacement
 from item.item import ItemType, ItemPlacement
-from classifier.image_utils import ImageParser, splitDataToTraining, plot_learning_curve
-from classifier.weight_estimation import get_default_weight_estimation_model, estimate_weight_with_model, \
-    mean_absolute_percentage_square_error
+from item.classifier.image_utils import ImageParser, splitDataToTraining
+from item.classifier.weight_estimation import get_default_weight_estimation_model, mean_absolute_percentage_square_error
 from sensor.params import ImageMask
 from sensor.data_parsing import flatten
-from classifier.position_recognition import check_item_on_edge
 
 # Definitions
 path = "c_img_v2"
-model_path = "classifier/models/weight_model.keras"
+model_path = "item/classifier/models/weight_model.keras"
 mask = ImageMask()
 parser = ImageParser()
 shape = (16, 16, 1)

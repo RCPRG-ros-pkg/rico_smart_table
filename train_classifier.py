@@ -5,9 +5,9 @@ from copy import deepcopy
 
 from item.item_utils import loadItems, selectDesiredItems, selectDesiredPlacement, rotate_item, flip_item
 from item.item import ItemType, ItemPlacement
-from classifier.image_utils import ImageParser, LabelsMap, splitDataToTraining
-from classifier.image_recognition import Classifier
-from classifier.position_recognition import check_item_on_edge
+from item.classifier.image_utils import ImageParser, splitDataToTraining
+from item.classifier.image_recognition import Classifier
+from item.classifier.position_recognition import check_item_on_edge
 from sensor.params import ImageMask
 from languages.en import itemTranslationDict
 
@@ -100,7 +100,7 @@ y_test = parser.parseLabelsToArray(testSet)
 
 classifier = Classifier()
 ##############################
-# classifier.import_model("classifier/models/test_model.keras")
+# classifier.import_model("item/classifier/models/test_model.keras")
 ###############
 classifier.set_model(Classifier.get_default_model(y_train.shape[1]),
                      parser.parseOrdinalNumbersToItemTypes(list(range(0, y_train.shape[1]))))
@@ -126,4 +126,4 @@ print(testSet[5].type)
 print(itemTranslationDict[elo_[0]])
 
 # Export model
-# classifier.export_model("classifier/models/test_model.keras")
+# classifier.export_model("item/classifier/models/test_model.keras")

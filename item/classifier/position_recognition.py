@@ -1,11 +1,10 @@
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 
-from item.item import ItemPlacement, ItemShape, ItemType
+from item.item import ItemPlacement
 from sensor.params import ImageMask
 from debug.debug import debug, DBGLevel
-from classifier.image_utils import stretch_image
+from item.classifier.image_utils import stretch_image
 
 
 def get_image_centroid(image, output_type):
