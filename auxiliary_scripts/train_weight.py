@@ -13,7 +13,7 @@ from sensor.data_parsing import flatten
 
 # Definitions
 path = "c_img_v2"
-model_path = "item/classifier/models/weight_model.keras"
+model_path = "../item/classifier/models/weight_model.keras"
 mask = ImageMask()
 parser = ImageParser()
 shape = (16, 16, 1)
