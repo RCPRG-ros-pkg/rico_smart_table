@@ -47,7 +47,8 @@ class TableNode(Node):
                  model_path="item/classifier/models/classifier_model.keras",
                  topic_prefix="/table",
                  weight_calculation_mode="internal",
-                 weight_calculation_model_path="item/classifier/models/weight_model.keras"
+                 weight_calculation_model_path="item/classifier/models/weight_model.keras",
+                 default_turn_on=False
                  ):
         # Set status
         self.node_status = TableStatus.initializing
@@ -91,7 +92,11 @@ class TableNode(Node):
         # Run node
         self.topic_prefix = topic_prefix
         super(TableNode, self).__init__(node_name, subscribed_topics, published_topics, language=language)
-        self.node_status = TableStatus.table_off
+        if default_turn_on:
+            self.on_flag = default_turn_on
+            self.node_status = TableStatus.table_working
+        else:
+            self.node_status = TableStatus.table_off
         debug(DBGLevel.CRITICAL, "Table node has been initialized")
 
     def set_sensor(self, sensor):

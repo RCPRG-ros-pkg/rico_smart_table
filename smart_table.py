@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     sensor = Sensor(args.p)
     sensor.connect_to_controller()
-    node = TableNode(weight_calculation_mode="neuron")
+    node = TableNode(weight_calculation_mode="neuron", default_turn_on=True)
     node.set_sensor(sensor)
 
     while 1:
