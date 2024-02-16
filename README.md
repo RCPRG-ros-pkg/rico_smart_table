@@ -1,8 +1,9 @@
-## Lunching Dialogflow
-```
-source ./stasiek_ws/devel/setup.bash
-roslaunch dialogflow websocket.launch
-```
+## General informations
+
+- **Scenario manager** need *dialog* node to running `roslaunch dialog websocket.launch`
+- **Smart table** have to run on system that has a sensor connected to it
+- **Smart table** need to have access to proper USB port to work `sudo chmod 777 /dev/ttyUSB0` (or other USB number, depends on configuration)
+
 
 ## My nodes
 ```
@@ -12,7 +13,6 @@ source ../../venv/Art_Skin_MSc/bin/activate
 
 ### Inteligent table node
 ```
-sudo chmod 777 /dev/ttyUSB0
 python3 ./intelligent_table.py
 ```
 
@@ -26,7 +26,10 @@ rostopic pub /table/sgn_on std_msgs/Bool "data: true"
 python3 test_usage_node.py
 ```
 
-## Undock robot
+## Rico docking
+<details>
+  <summary>Undock robot</summary>
+  
 ```
 rostopic pub /undocker_server/goal laser_servoing_msgs/UndockActionGoal "header:
   seq: 0
@@ -41,8 +44,11 @@ goal_id:
   id: ''
 goal: {}"
 ```
+</details>
 
-## Dock robot
+<details>
+  <summary>Dock robot</summary>
+  
 ```
 rostopic pub /go_and_dock/goal dock_charge_sm_msgs/GoAndDockActionGoal "header:
   seq: 0
@@ -61,3 +67,4 @@ goal:
     nsecs: 0
   use_current_pose: true"
 ```
+</details>
