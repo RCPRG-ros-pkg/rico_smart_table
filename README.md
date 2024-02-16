@@ -13,14 +13,21 @@ Go to repository folder
 source ./setup.sh
 ```
 
-### Inteligent table node
+### Smart table node
 ```
 python3 ./smart_table.py
 ```
+```
+rosrun smart_table smart_table.py
+```
 
 ### Scenario node
+Scenario node need **smart_table** to work properly
 ```
 python3 ./scenario_manager.py
+```
+```
+rosrun smart_table scenario_manager.py
 ```
 
 ## Rico docking
