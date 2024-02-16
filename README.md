@@ -3,27 +3,24 @@
 - **Scenario manager** need *dialog* node to running `roslaunch dialog websocket.launch`
 - **Smart table** have to run on system that has a sensor connected to it
 - **Smart table** need to have access to proper USB port to work `sudo chmod 777 /dev/ttyUSB0` (or other USB number, depends on configuration)
+- **Smart table** is turned on by default right now but signal to turn it on manually might be usefull `rostopic pub /table/sgn_on std_msgs/Bool "data: true"`
 
 
-## My nodes
+## Setup virtual environment
+
+Go to repository folder
 ```
-cd ./Desktop/Tomek_Indeka_ArtSkin/Artificial_skin_MSc/Artificial_skin_scripts/
-source ../../venv/Art_Skin_MSc/bin/activate
+source ./setup.sh
 ```
 
 ### Inteligent table node
 ```
-python3 ./intelligent_table.py
-```
-
-Turn on node
-```
-rostopic pub /table/sgn_on std_msgs/Bool "data: true"
+python3 ./smart_table.py
 ```
 
 ### Scenario node
 ```
-python3 test_usage_node.py
+python3 ./scenario_manager.py
 ```
 
 ## Rico docking
