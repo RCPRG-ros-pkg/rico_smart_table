@@ -16,3 +16,6 @@ temp*.py
 
 # Compiled classifier
 *.h5
+
+# Virtual environment
+/venv*
