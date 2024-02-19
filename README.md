@@ -6,6 +6,9 @@
 - **Smart table** is turned on by default right now but signal to turn it on manually might be usefull `rostopic pub /table/sgn_on std_msgs/Bool "data: true"`
 
 
+sudo apt-get install python3.8-venv
+
+
 ## Setup virtual environment
 
 Go to repository folder

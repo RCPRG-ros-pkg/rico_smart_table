@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setup venv
-python3 -m venv ./venv
+python3.8 -m venv ./venv
 source ./venv/bin/activate
 
 # Setup environment and download packages
