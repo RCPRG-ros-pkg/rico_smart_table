@@ -1,5 +1,7 @@
 import time
 import numpy as np
+
+import rospkg
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool, String, Int32
 
@@ -11,7 +13,8 @@ from sensor.params import ImageMask
 from sensor.data_parsing import flatten
 from item.item import Item, ItemPlacement, ItemType
 from item.classifier.position_recognition import recognise_position
-from item.classifier.weight_estimation import estimate_weight, estimate_weight_with_model, mean_absolute_percentage_square_error
+from item.classifier.weight_estimation import estimate_weight, estimate_weight_with_model, \
+    mean_absolute_percentage_square_error
 from item.classifier.image_recognition import Classifier
 from debug.debug import *
 
@@ -42,7 +45,7 @@ class TableNode(Node):
 
     # weight_calculation: "internal", "neuron"
     def __init__(self,
-                 node_name="IntelligentTable",
+                 node_name="SmartTable",
                  language="en",
                  model_path="item/classifier/models/classifier_model.keras",
                  topic_prefix="/table",
@@ -75,16 +78,20 @@ class TableNode(Node):
         ret = Topic(topic_prefix + "/location", String)
         published_topics.append(ret)
 
+        # Localize path to resources
+        rp = rospkg.RosPack()
+        share_path = rp.get_path('smart_table') + '/'
+
         # Item classifier model initialization section
-        self.classifier_model_path = model_path
+        self.classifier_model_path = share_path + model_path
         self.item_classifier = Classifier()
         self.item_classifier.import_model(self.classifier_model_path)
 
         # Item weight variants
         if weight_calculation_mode == "neuron":
             self.weight_calculation_mode = weight_calculation_mode
-            self.weight_model_path = weight_calculation_model_path
-            self.weight_model = load_model(weight_calculation_model_path, custom_objects={
+            self.weight_model_path = share_path + weight_calculation_model_path
+            self.weight_model = load_model(self.weight_model_path, custom_objects={
                 'mean_absolute_percentage_square_error': mean_absolute_percentage_square_error})
         else:
             self.weight_calculation_mode = "internal"
@@ -148,7 +155,7 @@ class TableNode(Node):
         self.publish_msg_on_topic(self.topic_prefix + "/weight", prepare_int32_msg(int32))
 
     def publish_image(self, image):
-        self.publish_msg_on_topic(self.topic_prefix + "/raw_image", prepare_image_msg("Intelligent table node", image))
+        self.publish_msg_on_topic(self.topic_prefix + "/raw_image", prepare_image_msg("Smart table node", image))
 
     def new_image_from_sensor(self):
         self.new_image_flag = True

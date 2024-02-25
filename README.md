@@ -1,4 +1,4 @@
-### Smart table node
+## Smart table node
 - **Smart table** have to run on system that has a physical sensor connected to it
 - **Smart table** need to have access to proper USB port to work `sudo chmod 777 /dev/ttyUSB0` (or other USB number, depends on configuration)
 - **Smart table** is turned on by default right now but signal to turn it on manually might be usefull `rostopic pub /table/sgn_on std_msgs/Bool "data: true"`
@@ -10,7 +10,9 @@ python3 ./smart_table.py
 rosrun smart_table smart_table.py
 ```
 
-### Scenario manager node
+If it don't die with **Ctrl+C** use **Ctrl+\**.
+
+## Scenario manager node
 - **Scenario manager** need *dialog* node to running `roslaunch dialog websocket.launch`
 - **Scenario manager** need **smart_table** to work properly. **Smart table** can be launched later or restarted when **scenario manager** works.
 
@@ -70,5 +72,5 @@ During development of this code and tensorflow models I stumble upon this [issue
 To don't mess your global workspace I recommend to use **venv** and **python 3.8**. Also I created script to setup this venv. This script creates venv in directory of executing.
 ```
 sudo apt-get install python3.8-venv
-source ./setup.sh
+source ./venv_setup.sh
 ```

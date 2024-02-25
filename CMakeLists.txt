@@ -3,7 +3,6 @@ project(smart_table)
 
 find_package(catkin REQUIRED)
 
-
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES smart_table
@@ -15,5 +14,12 @@ catkin_package(
 include_directories(
 # include
 # ${catkin_INCLUDE_DIRS}
+)
+
+# catkin_python_setup()
+
+install(
+  DIRECTORY   item/classifier/models/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/models/
 )
 
