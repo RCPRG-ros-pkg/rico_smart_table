@@ -36,7 +36,7 @@ def prepare_image_msg(header_str, val):
             msg = ros_numpy.msgify(Image, val, encoding="mono8")
             msg.header = Header()
             msg.header.frame_id = header_str
-        except:
+        except ValueError:
             debug(DBGLevel.ERROR, "Unsuccessfull image parsing")
             return None
         return msg

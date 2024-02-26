@@ -107,7 +107,7 @@ class Serial(QtCore.QThread):
                     try:
                         input_msg = self.ser.readline().decode('utf-8')
                         input_msg = input_msg.lstrip('\0')
-                    except:
+                    except UnicodeEncodeError:
                         input_msg = str()
                         debug(DBGLevel.ERROR, "Bad read of serial: \"" + input_msg + "\"")
                         continue
@@ -117,7 +117,7 @@ class Serial(QtCore.QThread):
                         lines = input_msg.strip().split('|')
                         try:
                             lines.remove('')  # Last line is always empty
-                        except:
+                        except ValueError:
                             pass
 
                         if len(lines) is not self.rows:
@@ -140,9 +140,9 @@ class Serial(QtCore.QThread):
                                 try:
                                     field_pressure = float(value)
                                     if field_pressure > self.max_possible_value:
-                                        raise Exception("Read value is too high")
+                                        raise ValueError("Read value is too high")
                                     self.pressure_map[j][i] = field_pressure
-                                except:
+                                except ValueError:
                                     corrupted_input_msg = True
                                     debug(DBGLevel.ERROR,
                                           "Kurwaaaaaaaaaaaaa\n" + str(i) + "\n" + str(j) + "\n" + str(value))

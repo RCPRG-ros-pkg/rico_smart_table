@@ -17,10 +17,14 @@ if __name__ == "__main__":
                         default=Serial.default_port_name())
     args = parser.parse_args()
 
-    sensor = Sensor(args.p)
-    sensor.connect_to_controller()
-    node = TableNode(weight_calculation_mode="neuron", default_turn_on=True)
-    node.set_sensor(sensor)
+    try:
+        sensor = Sensor(args.p)
+        sensor.connect_to_controller()
+        node = TableNode(weight_calculation_mode="neuron", default_turn_on=True)
+        node.set_sensor(sensor)
 
-    while 1:
-        time.sleep(60)
+        while 1:
+            time.sleep(5)
+    except KeyboardInterrupt:
+        print("Siema")
+        pass

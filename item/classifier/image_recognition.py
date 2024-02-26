@@ -49,7 +49,7 @@ class Classifier:
                     else:
                         item_predictions.append(ItemType.unknown)
                 return item_predictions
-            except:
+            except (AttributeError, ValueError, KeyError):
                 debug(DBGLevel.ERROR, "Item prediction failed")
                 return [[ItemType.unknown]]
         else:
