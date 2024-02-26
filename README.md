@@ -10,7 +10,7 @@ python3 ./smart_table.py
 rosrun smart_table smart_table.py
 ```
 
-If it don't die with **Ctrl+C** use **Ctrl+\**.
+If it don't die with **Ctrl+C** use **Ctrl+\\**.
 
 ## Scenario manager node
 - **Scenario manager** need *dialog* node to running `roslaunch dialog websocket.launch`
