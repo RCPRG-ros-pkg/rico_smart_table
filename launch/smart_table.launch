@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="smart_table" type="smart_table.py" name="SmartTable" output="screen">
+  </node>
+
+</launch>

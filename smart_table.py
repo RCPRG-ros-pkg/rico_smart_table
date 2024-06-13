@@ -2,7 +2,7 @@
 
 import time
 import os
-import argparse
+import rospy
 
 # Suppress tensorflow noncritical warnings
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -12,15 +12,10 @@ from sensor.sensor import Sensor
 from connection.connection import Serial
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-p", metavar="PORT", help="USB port where intelligent skin is connected",
-                        default=Serial.default_port_name())
-    args = parser.parse_args()
 
-    sensor = Sensor(args.p)
+    sensor = Sensor(Serial.default_port_name())
     sensor.connect_to_controller()
     node = TableNode(weight_calculation_mode="neuron", default_turn_on=True)
     node.set_sensor(sensor)
+    rospy.spin()
 
-    while 1:
-        time.sleep(60)
